@@ -1,8 +1,6 @@
 #!/bin/bash
 
-dnf remove -y tmux
 
-echo "Setting up LiteLLM..." >> /tmp/runtime-scripts/setup-rhel3.log
 
 # systemctl stop dnf-automatic-install.timer
 # systemctl disable dnf-automatic-install.timer
