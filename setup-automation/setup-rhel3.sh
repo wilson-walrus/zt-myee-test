@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "Setting up LiteLLM..." >> /tmp/setup-rhel3.log
+echo "starting setup-rhel3.sh" >> /tmp/setup-rhel3.log
+
 # echo "Setting up LiteLLM..." >> /tmp/runtime-scripts/setup-rhel3.log
 
 # systemctl stop dnf-automatic-install.timer
