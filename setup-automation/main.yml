@@ -69,7 +69,6 @@
     environment:
       GUID: "{{ guid }}"
       DOMAIN: "{{ domain }}"
-      TFE_API_TOKEN: "{{ tfe_api_token }}"
       LITELLM_API_KEY: "{{ litellm_api_key }}"
 
   - name: Output script result
