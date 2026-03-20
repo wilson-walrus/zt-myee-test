@@ -3,8 +3,10 @@ virtualmachines:
   - name: "satellite"
     image: "satellite-server-rhdp-1-6-18-10-11-25"
     bootloader: efi
-    register_satellite: false
+    register_satellite: true
     memory: "32G"
+    packages:
+      - tmux
     cores: 8
     image_size: "540Gi"
     tags:
@@ -75,7 +77,7 @@ virtualmachines:
   - name: "rhel1"
     image: "rhel-10-1-11-13-25"
     bootloader: efi
-    register_satellite: false
+    register_satellite: true
     memory: "4G"
     cores: 1
     image_size: "40G"
@@ -93,7 +95,7 @@ virtualmachines:
   - name: "rhel2"
     image: "rhel-10-1-11-13-25"
     bootloader: efi
-    register_satellite: false
+    register_satellite: true
     memory: "4G"
     cores: 1
     image_size: "40G"
@@ -111,7 +113,7 @@ virtualmachines:
   - name: "rhel3"
     image: "rhel-10-1-11-13-25"
     bootloader: efi
-    register_satellite: false
+    register_satellite: true
     memory: "4G"
     cores: 1
     image_size: "40G"
