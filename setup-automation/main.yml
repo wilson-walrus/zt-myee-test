@@ -22,9 +22,15 @@
     loop:
       - rhel1
       - rhel2
+      - rhel3
+
 - name: Demo Playbook for the ansible-runner API
   hosts: all:!localhost
   gather_facts: false
+  vars:
+    guid: "{{ lookup('ansible.builtin.env', 'GUID') }}"
+    domain: "{{ lookup('ansible.builtin.env', 'DOMAIN') }}"
+    litellm_api_key: "{{ lookup('ansible.builtin.env', 'LITELLM_API_KEY' }}"
   tasks:
 
   - ansible.builtin.wait_for_connection:
@@ -60,6 +66,11 @@
     shell: "sh -x /tmp/setup-scripts/setup-{{ ansible_host }}.sh > /tmp/setup-scripts/setup-{{ ansible_host }}.log 2>&1"
     become: true
     register: r_result
+    environment:
+      GUID: "{{ guid }}"
+      DOMAIN: "{{ domain }}"
+      TFE_API_TOKEN: "{{ tfe_api_token }}"
+      LITELLM_API_KEY: "{{ litellm_api_key }}"
 
   - name: Output script result
     ansible.builtin.debug:
