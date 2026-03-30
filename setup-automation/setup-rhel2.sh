@@ -1,21 +1,22 @@
 #!/bin/bash
+set -euo pipefail
 
-echo "starting setup-rhel2.sh" >> /tmp/runtime-scripts/setup-rhel2.log
+mkdir -p /tmp/setup-scripts /tmp/runtime-scripts
+LOG=/tmp/runtime-scripts/setup-rhel2.log
 
-echo "LITELLM_API_KEY: $LITELLM_API_KEY" >> /tmp/runtime-scripts/setup-rhel2.log
-echo $LITELLM_API_KEY >> /tmp/LITELLM_API_KEY
+echo "starting setup-rhel2.sh" >> "$LOG"
+echo "LITELLM_API_KEY: ${LITELLM_API_KEY:+(set)}" >> "$LOG"
 
+cat << EOF > /tmp/setup-scripts/litellm.env
+export LITELLM_API_KEY='$LITELLM_API_KEY'
+export LITELLM_API_URL='$LITELLM_API_URL'
+EOF
 
-cd /tmp
-git clone https://github.com/block/goose.git
-# cd goose
-# echo "Building Goose..." >> /tmp/runtime-scripts/setup-rhel3.log
-# go build -o goose cmd/goose/main.go
-# echo "Goose built successfully" >> /tmp/runtime-scripts/setup-rhel3.log
+chmod 600 /tmp/setup-scripts/litellm.env
 
-#./goose -api-key /tmp/LITELLM_API_KEY -model gpt-4o-mini -temperature 0.5 -max-tokens 1000 -messages "What is the weather in Tokyo?"
+if [[ ! -d /tmp/goose ]]; then
+    echo "Cloning goose..." >> "$LOG"
+    git clone https://github.com/block/goose.git /tmp/goose >> "$LOG" 2>&1
+fi
 
-
-# systemctl stop dnf-automatic-install.timer
-# systemctl disable dnf-automatic-install.timer
-# systemctl mask dnf-automatic-install.timer
+echo "setup-rhel2.sh complete" >> "$LOG"
