@@ -30,7 +30,8 @@
   vars:
     guid: "{{ lookup('ansible.builtin.env', 'GUID') }}"
     domain: "{{ lookup('ansible.builtin.env', 'DOMAIN') }}"
-    litellm_api_key: "{{ lookup('ansible.builtin.env', 'LITELLM_API_KEY' }}"
+    litellm_api_key: "{{ lookup('ansible.builtin.env', 'LITELLM_API_KEY') }}"
+    litellm_api_url: "{{ lookup('ansible.builtin.env', 'LITELLM_API_URL') }}"
   tasks:
 
   - ansible.builtin.wait_for_connection:
@@ -70,6 +71,7 @@
       GUID: "{{ guid }}"
       DOMAIN: "{{ domain }}"
       LITELLM_API_KEY: "{{ litellm_api_key }}"
+      LITELLM_API_URL: "{{ litellm_api_url }}"
 
   - name: Output script result
     ansible.builtin.debug:
